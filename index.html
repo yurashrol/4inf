@@ -122,16 +122,10 @@
       <div class="hero-icon" aria-hidden="true">💻</div>
       <h1>Інформатика — 4 клас</h1>
       <p>Досліджуй, програмуй, створюй власні проєкти!</p>
-      <div class="hero-note">Навчальні матеріали • Презентації • Практичні завдання</div>
+      <div class="hero-note">Презентації • Інтерактивні вправи • Практичні завдання</div>
     </header>
 
-    <div class="toolbar">
-      <div class="counter">📘 У курсі: <span id="topicCount">36</span> теми</div>
-      <label class="search-wrap">
-        <span aria-hidden="true">🔎</span>
-        <input id="search" type="search" placeholder="Знайти тему..." aria-label="Пошук тем">
-      </label>
-    </div>
+    
 
     <section class="unit" aria-labelledby="unit1">
       <h2 class="unit-heading" id="unit1"><span class="unit-icon">🌐</span> Цифрове навчання</h2>
@@ -233,65 +227,42 @@
         <a class="topic-card" href="lessons/lesson-29.html">
           <span class="topic-number">29</span><span class="topic-title">Перетворення та кодування інформації</span>
         </a>
-        <a class="topic-card" href="lessons/lesson-30.html">
-          <span class="topic-number">30</span><span class="topic-title">Дані та їх представлення</span>
-        </a>
+        
       </div>
     </section>
     <section class="unit" aria-labelledby="unit4">
-      <h2 class="unit-heading" id="unit4"><span class="unit-icon">📊</span> Текст і візуалізація даних</h2>
+      <h2 class="unit-heading" id="unit4"><span class="unit-icon">📊</span> Дані та їх представлення</h2>
       <div class="topics-grid">
+        <a class="topic-card" href="lessons/lesson-30.html">
+          <span class="topic-number">30</span><span class="topic-title">Редагування й форматування тексту</span>
+        </a>
         <a class="topic-card" href="lessons/lesson-31.html">
-          <span class="topic-number">31</span><span class="topic-title">Редагування й форматування тексту</span>
+          <span class="topic-number">31</span><span class="topic-title">Списки в текстових документах</span>
         </a>
         <a class="topic-card" href="lessons/lesson-32.html">
-          <span class="topic-number">32</span><span class="topic-title">Списки в текстових документах</span>
+          <span class="topic-number">32</span><span class="topic-title">Таблиці для впорядкування інформації</span>
         </a>
         <a class="topic-card" href="lessons/lesson-33.html">
-          <span class="topic-number">33</span><span class="topic-title">Таблиці для впорядкування інформації</span>
-        </a>
-        <a class="topic-card" href="lessons/lesson-34.html">
-          <span class="topic-number">34</span><span class="topic-title">Схеми й діаграми. Візуальне подання даних</span>
+          <span class="topic-number">33</span><span class="topic-title">Схеми й діаграми. Візуальне подання даних</span>
         </a>
       </div>
     </section>
     <section class="unit" aria-labelledby="unit5">
       <h2 class="unit-heading" id="unit5"><span class="unit-icon">🚀</span> Навчальний проєкт</h2>
       <div class="topics-grid">
-        <a class="topic-card" href="lessons/lesson-35.html">
-          <span class="topic-number">35</span><span class="topic-title">Планування індивідуального або групового проєкту</span>
+        <a class="topic-card" href="lessons/lesson-34.html">
+          <span class="topic-number">34</span><span class="topic-title">Планування індивідуального або групового проєкту</span>
         </a>
-        <a class="topic-card" href="lessons/lesson-36.html">
-          <span class="topic-number">36</span><span class="topic-title">Створення, презентація проєкту та підбиття підсумків</span>
+        <a class="topic-card" href="lessons/lesson-35.html">
+          <span class="topic-number">35</span><span class="topic-title">Створення, презентація проєкту та підбиття підсумків</span>
         </a>
       </div>
     </section>
 
-    <div class="empty" id="empty">За вашим запитом тем не знайдено. Спробуйте інші ключові слова.</div>
-    <footer>Навчальний сайт з інформатики для <strong>4 класу</strong></footer>
+    
+    <footer>© 2026 | Інформатика — 4 клас | Автор: Юрій Шроль</footer>
   </main>
 
-  <script>
-    const search = document.getElementById('search');
-    const cards = [...document.querySelectorAll('.topic-card')];
-    const units = [...document.querySelectorAll('.unit')];
-    const count = document.getElementById('topicCount');
-    const empty = document.getElementById('empty');
-
-    search.addEventListener('input', () => {
-      const query = search.value.trim().toLocaleLowerCase('uk');
-      let visible = 0;
-      cards.forEach(card => {
-        const match = card.textContent.toLocaleLowerCase('uk').includes(query);
-        card.hidden = !match;
-        if (match) visible++;
-      });
-      units.forEach(unit => {
-        unit.hidden = ![...unit.querySelectorAll('.topic-card')].some(card => !card.hidden);
-      });
-      count.textContent = query ? `${visible} із ${cards.length}` : cards.length;
-      empty.style.display = visible ? 'none' : 'block';
-    });
-  </script>
+  
 </body>
 </html>
