@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Робочий аркуш — Чому важливо бути чесним?</title>
+<style>
+:root{--ink:#24324a;--muted:#64748b;--blue:#3977d5;--teal:#20a68a;--yellow:#ffd76a;--pink:#ff8fa3;--paper:#fffdf7;--line:#e7edf5}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#eaf5ff,#fff4e8);font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:24px 16px 50px}
+.hero{background:linear-gradient(120deg,#3977d5,#4bb9b0);color:white;border-radius:26px;padding:28px 30px;margin-bottom:22px;box-shadow:0 12px 28px #355b8b22}
+.hero h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 10px}
+.hero p{margin:0;font-size:17px}
+.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.meta span{background:#ffffff25;border:1px solid #ffffff55;border-radius:99px;padding:6px 12px;font-size:14px}
+.task{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:22px;margin:18px 0;box-shadow:0 7px 20px #304b6810}
+.task h2{font-size:22px;margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.num{display:inline-grid;place-items:center;flex:0 0 36px;height:36px;border-radius:12px;background:#e8f1ff;color:#2865bd;font-weight:800}
+.hint{color:var(--muted);margin:0 0 16px}
+.options{display:grid;gap:10px}
+.option{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:1.5px solid #dce5ef;border-radius:13px;background:white;cursor:pointer}
+.option:hover{border-color:#83aee9;background:#f7fbff}
+.option input{margin-top:5px;accent-color:var(--blue);transform:scale(1.15)}
+select,.answer-input{font:inherit;border:1.5px solid #cbd8e8;border-radius:10px;padding:10px 12px;background:white;color:var(--ink);max-width:100%}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.match-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.match-row strong{font-size:15px}
+button{border:0;border-radius:12px;padding:11px 18px;font:700 16px "Trebuchet MS",Arial,sans-serif;cursor:pointer}
+.check{margin-top:17px;background:var(--blue);color:white;box-shadow:0 4px 0 #2457a4}
+.check:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.feedback{display:none;margin-top:13px;padding:12px 14px;border-radius:12px;font-weight:700}
+.feedback.good{display:block;background:#e5f8ef;color:#16734f;border:1px solid #bcebd4}
+.feedback.bad{display:block;background:#fff0e8;color:#a34d20;border:1px solid #ffd1b8}
+.feedback.neutral{display:block;background:#eef5ff;color:#285b9c;border:1px solid #cfe0fa}
+.statement{padding:12px 14px;background:white;border:1px solid var(--line);border-radius:12px;margin:9px 0}
+.statement select{margin-left:8px}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.word{background:#fff0c2;border:1px solid #f4d66d;border-radius:9px;padding:6px 11px;font-weight:700}
+.fill-line{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}
+.fill-line input{width:190px}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border:2px dashed #c8d8ec;border-radius:18px;padding:18px;margin-top:24px}
+.score{font-size:18px;font-weight:800}
+.reset{background:#eaf0f8;color:#36506f}
+.small{font-size:13px;color:var(--muted)}
+@media(max-width:650px){.match-grid{grid-template-columns:1fr}.task{padding:17px}.hero{padding:23px}.match-row{align-items:flex-start;flex-direction:column}.statement select{margin:8px 0 0;display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <h1>Чому важливо бути чесним?</h1>
+  <p>Інтерактивний робочий аркуш з інформатики · 4 клас</p>
+  <div class="meta"><span>5 завдань</span><span>Читай уважно</span><span>Натискай «Перевірити»</span></div>
+</header>
+
+<section class="task" id="t1">
+  <h2><span class="num">1</span> Обери чесний вчинок</h2>
+  <p class="hint">Познач усі варіанти, які свідчать про чесність.</p>
+  <div class="options">
+    <label class="option"><input type="checkbox" name="q1" value="a"> Сказати вчителю, що випадково видалив файл.</label>
+    <label class="option"><input type="checkbox" name="q1" value="b"> Скопіювати роботу друга й підписати її своїм ім’ям.</label>
+    <label class="option"><input type="checkbox" name="q1" value="c"> Указати автора зображення, яке використав у роботі.</label>
+    <label class="option"><input type="checkbox" name="q1" value="d"> Зізнатися, що не знаєш відповіді, замість списування.</label>
+  </div>
+  <button class="check" onclick="check1()">Перевірити</button><div class="feedback" id="f1" aria-live="polite"></div>
+</section>
+
+<section class="task" id="t2">
+  <h2><span class="num">2</span> Правда чи неправда?</h2>
+  <p class="hint">Для кожного твердження обери правильну відповідь.</p>
+  <div class="statement">1. Можна видавати знайдений в інтернеті текст за власний.
+    <select id="q2a"><option value="">Обери…</option><option value="t">Правда</option><option value="f">Неправда</option></select>
+  </div>
+  <div class="statement">2. Якщо помилився, краще чесно про це сказати.
+    <select id="q2b"><option value="">Обери…</option><option value="t">Правда</option><option value="f">Неправда</option></select>
+  </div>
+  <div class="statement">3. Чесність допомагає людям довіряти одне одному.
+    <select id="q2c"><option value="">Обери…</option><option value="t">Правда</option><option value="f">Неправда</option></select>
+  </div>
+  <button class="check" onclick="check2()">Перевірити</button><div class="feedback" id="f2" aria-live="polite"></div>
+</section>
+
+<section class="task" id="t3">
+  <h2><span class="num">3</span> Знайди правильну пару</h2>
+  <p class="hint">Добери до кожної ситуації чесну дію.</p>
+  <div class="match-grid">
+    <div class="match-row"><strong>Знайшов у мережі чуже зображення</strong><select id="q3a"><option value="">Обери дію…</option><option value="a">Указати автора або джерело</option><option value="b">Сказати правду й попросити допомоги</option><option value="c">Не поширювати, доки не перевіриш</option></select></div>
+    <div class="match-row"><strong>Випадково зіпсував файл</strong><select id="q3b"><option value="">Обери дію…</option><option value="a">Указати автора або джерело</option><option value="b">Сказати правду й попросити допомоги</option><option value="c">Не поширювати, доки не перевіриш</option></select></div>
+    <div class="match-row"><strong>Отримав дивне повідомлення</strong><select id="q3c"><option value="">Обери дію…</option><option value="a">Указати автора або джерело</option><option value="b">Сказати правду й попросити допомоги</option><option value="c">Не поширювати, доки не перевіриш</option></select></div>
+  </div>
+  <button class="check" onclick="check3()">Перевірити</button><div class="feedback" id="f3" aria-live="polite"></div>
+</section>
+
+<section class="task" id="t4">
+  <h2><span class="num">4</span> Як ти вчиниш?</h2>
+  <p class="hint">Прочитай ситуацію та обери найкращу відповідь.</p>
+  <p><strong>Ти виконуєш завдання на комп’ютері й бачиш готову роботу однокласника. Часу залишилося мало. Що зробиш?</strong></p>
+  <div class="options">
+    <label class="option"><input type="radio" name="q4" value="a"> Скопіюю роботу й напишу своє ім’я.</label>
+    <label class="option"><input type="radio" name="q4" value="b"> Виконаю завдання самостійно. Якщо не встигну — чесно скажу про це.</label>
+    <label class="option"><input type="radio" name="q4" value="c"> Попрошу друга виконати завдання замість мене.</label>
+  </div>
+  <button class="check" onclick="check4()">Перевірити</button><div class="feedback" id="f4" aria-live="polite"></div>
+</section>
+
+<section class="task" id="t5">
+  <h2><span class="num">5</span> Доповни правила чесного користувача</h2>
+  <p class="hint">Встав слова з набору. Кожне слово використай один раз.</p>
+  <div class="word-bank"><span class="word">правду</span><span class="word">автора</span><span class="word">перевіряти</span></div>
+  <div class="fill-line">В інтернеті потрібно говорити <input class="answer-input" id="q5a" placeholder="Впиши слово">.</div>
+  <div class="fill-line">Використовуючи чуже зображення, слід зазначати <input class="answer-input" id="q5b" placeholder="Впиши слово">.</div>
+  <div class="fill-line">Перед поширенням повідомлення варто <input class="answer-input" id="q5c" placeholder="Впиши слово"> інформацію.</div>
+  <button class="check" onclick="check5()">Перевірити</button><div class="feedback" id="f5" aria-live="polite"></div>
+</section>
+
+<div class="footer">
+  <div><div class="score" id="total">Виконано завдань: 0 із 5</div><div class="small">Після перевірки кожного завдання тут оновиться результат.</div></div>
+  <button class="reset" onclick="resetAll()">Почати спочатку</button>
+</div>
+</div>
+<script>
+const done = new Set();
+function feedback(n, ok, message){
+ const el=document.getElementById('f'+n);
+ el.className='feedback '+(ok?'good':'bad'); el.textContent=message;
+ done.add(n); document.getElementById('total').textContent='Перевірено завдань: '+done.size+' із 5';
+}
+function check1(){
+ const v=[...document.querySelectorAll('input[name="q1"]:checked')].map(x=>x.value).sort().join('');
+ feedback(1,v==='acd','acd'===v?'Правильно! Чесність — це говорити правду, визнавати помилки й поважати авторство.':'Спробуй ще раз. Правильні варіанти: сказати про помилку, указати автора, не списувати.');
+}
+function check2(){
+ const v=['q2a','q2b','q2c'].map(id=>document.getElementById(id).value);
+ const ok=v.join('')==='ftt';
+ feedback(2,ok,ok?'Чудово! Усі три твердження визначено правильно.':'Не зовсім. Правильні відповіді: 1 — неправда, 2 — правда, 3 — правда.');
+}
+function check3(){
+ const v=['q3a','q3b','q3c'].map(id=>document.getElementById(id).value);
+ const ok=v.join('')==='abc';
+ feedback(3,ok,ok?'Усі пари правильні! Ти обрав чесні та відповідальні дії.':'Перевір пари ще раз: зображення — автор, зіпсований файл — сказати правду, дивне повідомлення — перевірити.');
+}
+function check4(){
+ const v=document.querySelector('input[name="q4"]:checked');
+ const ok=!!v&&v.value==='b';
+ feedback(4,ok,ok?'Правильно! Важливо виконувати роботу самостійно й чесно говорити про результат.':'Подумай, який вибір не привласнює чужу роботу й допомагає навчитися самому.');
+}
+function check5(){
+ const norm=id=>document.getElementById(id).value.trim().toLocaleLowerCase('uk-UA').replace(/[.!?]/g,'');
+ const v=[norm('q5a'),norm('q5b'),norm('q5c')];
+ const ok=v.join('|')==='правду|автора|перевіряти';
+ feedback(5,ok,ok?'Чудово! Ти склав три важливі правила чесної поведінки в інтернеті.':'Перевір слова: говорити що? зазначати кого? що робити з інформацією?');
+}
+function resetAll(){
+ document.querySelectorAll('input').forEach(x=>{if(x.type==='checkbox'||x.type==='radio')x.checked=false;else x.value='';});
+ document.querySelectorAll('select').forEach(x=>x.value='');
+ for(let i=1;i<=5;i++){const e=document.getElementById('f'+i);e.className='feedback';e.textContent='';}
+ done.clear();document.getElementById('total').textContent='Виконано завдань: 0 із 5';
+}
+</script>
+</body>
+</html>
